@@ -4,3 +4,5 @@
 *.gz
 *.out
 .DS_store
+.env
+exp/.ipynb_checkpoints
