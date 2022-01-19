@@ -22,5 +22,5 @@ python -m ipykernel install --user --name=spotify-analysis
 ```
 
 # Data source
-The data is requested from the (Spotify Web API)[https://developer.spotify.com/documentation/web-api/]. To access the API a (free) Spotify account is necessary. We use the OAuth2 [Client Credentials flow](https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/) to obtain an access token.
+The data is requested from the (Spotify Web API)[https://developer.spotify.com/documentation/web-api/]. To access the API a (free) Spotify account is necessary. We use the OAuth2 (Client Credentials flow)[https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/] to obtain an access token.
 
