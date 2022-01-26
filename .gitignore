@@ -6,5 +6,5 @@
 .DS_store
 .env
 exp/.ipynb_checkpoints
-.bak
+*.bak
 __pycache__
