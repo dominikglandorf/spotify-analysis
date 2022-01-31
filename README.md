@@ -1,4 +1,4 @@
-This project aims to analyse spotify features.
+This project analyses Spotify tracks with regard to the variability of their audio features. 
 
 # Requirements
 
