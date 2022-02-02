@@ -10,33 +10,55 @@ dependencies:
   - backports=1.0=py_2
   - backports.functools_lru_cache=1.6.4=pyhd8ed1ab_0
   - black=21.12b0=pyhd8ed1ab_0
+  - blas=1.0=mkl
   - bleach=4.1.0=pyhd8ed1ab_0
+  - brotli=1.0.9=hb1e8313_2
   - bzip2=1.0.8=h0d85af4_4
   - ca-certificates=2021.10.26=hecd8cb5_2
+  - cycler=0.11.0=pyhd3eb1b0_0
   - dataclasses=0.8=pyhc8e2a94_3
   - decorator=5.1.1=pyhd8ed1ab_0
   - defusedxml=0.7.1=pyhd8ed1ab_0
   - entrypoints=0.3=pyhd8ed1ab_1003
   - executing=0.8.2=pyhd8ed1ab_0
   - flit-core=3.6.0=pyhd8ed1ab_0
+  - fonttools=4.25.0=pyhd3eb1b0_0
+  - freetype=2.11.0=hd8bbffd_0
+  - giflib=5.2.1=haf1e3a3_0
   - importlib_resources=5.4.0=pyhd8ed1ab_0
+  - intel-openmp=2021.4.0=hecd8cb5_3538
   - ipython_genutils=0.2.0=py_1
   - jinja2=3.0.3=pyhd8ed1ab_0
+  - jpeg=9d=h9ed2024_0
   - jsonschema=4.4.0=pyhd8ed1ab_0
   - jupyter_client=7.1.1=pyhd8ed1ab_0
   - jupyter_core=4.9.1=py310h2ec42d9_1
   - jupyterlab_pygments=0.1.2=pyh9f0ad1d_0
+  - lcms2=2.12=hf1fd2bf_0
   - libcxx=12.0.1=habf9029_1
   - libffi=3.4.2=h0d85af4_5
+  - libgfortran=3.0.1=h93005f0_2
+  - libpng=1.6.37=ha441bb4_0
   - libsodium=1.0.18=hbcb3906_1
+  - libtiff=4.2.0=h87d7836_0
+  - libwebp=1.2.0=hacca55c_0
+  - libwebp-base=1.2.0=h9ed2024_0
   - libzlib=1.2.11=h9173be1_1013
+  - lz4-c=1.9.3=h23ab428_1
+  - matplotlib-base=3.5.0=py310h8070d28_0
   - matplotlib-inline=0.1.3=pyhd8ed1ab_0
+  - mkl=2021.4.0=hecd8cb5_637
+  - mkl_fft=1.3.1=py310hf879493_0
+  - mkl_random=1.2.2=py310hc081a56_0
+  - munkres=1.1.4=py_0
   - mypy_extensions=0.4.3=py310h2ec42d9_4
   - nbclient=0.5.10=pyhd8ed1ab_1
   - nbformat=5.1.3=pyhd8ed1ab_0
   - ncurses=6.2=h2e338ed_4
   - nest-asyncio=1.5.4=pyhd8ed1ab_0
   - notebook=6.4.7=pyha770c72_0
+  - numpy-base=1.21.2=py310he490955_0
+  - olefile=0.46=pyhd3eb1b0_0
   - openssl=3.0.0=h0d85af4_2
   - packaging=21.3=pyhd8ed1ab_0
   - pandoc=2.17.0.1=h0d85af4_0
@@ -55,8 +77,10 @@ dependencies:
   - pyparsing=3.0.6=pyhd8ed1ab_0
   - python=3.10.2=h38b4d05_0_cpython
   - python-dateutil=2.8.2=pyhd8ed1ab_0
+  - python-dotenv=0.19.2=pyhd8ed1ab_0
   - python_abi=3.10=2_cp310
   - readline=8.1=h05e3726_0
+  - seaborn=0.11.2=pyhd3eb1b0_0
   - send2trash=1.8.0=pyhd8ed1ab_0
   - six=1.16.0=pyh6c4a22f_0
   - sqlite=3.37.0=h23a322b_0
@@ -64,6 +88,7 @@ dependencies:
   - testpath=0.5.0=pyhd8ed1ab_0
   - tk=8.6.11=h5dbffcc_1
   - tomli=1.2.2=pyhd8ed1ab_0
+  - tqdm=4.62.3=pyhd3eb1b0_1
   - traitlets=5.1.1=pyhd8ed1ab_0
   - typing_extensions=4.0.1=pyha770c72_0
   - tzdata=2021e=he74cb21_0
@@ -74,9 +99,11 @@ dependencies:
   - zeromq=4.3.4=he49afe7_1
   - zipp=3.7.0=pyhd8ed1ab_0
   - zlib=1.2.11=h9173be1_1013
+  - zstd=1.4.9=h322a384_0
   - pip:
     - appnope==0.1.2
     - argon2-cffi-bindings==21.2.0
+    - bottleneck==1.3.2
     - certifi==2021.10.8
     - cffi==1.15.0
     - charset-normalizer==2.0.10
@@ -88,14 +115,25 @@ dependencies:
     - ipython==8.0.0
     - jedi==0.18.1
     - jupyter-core==4.9.1
+    - kiwisolver==1.3.1
     - markupsafe==2.0.1
+    - matplotlib==3.5.0
     - mistune==0.8.4
+    - mkl-fft==1.3.1
+    - mkl-random==1.2.2
+    - mkl-service==2.4.0
     - mypy-extensions==0.4.3
     - nbconvert==6.4.0
+    - numexpr==2.8.1
+    - numpy==1.21.2
+    - pandas==1.3.5
+    - pillow==8.4.0
     - pip==21.2.4
     - pyrsistent==0.18.1
+    - pytz==2021.3
     - pyzmq==22.3.0
     - requests==2.27.1
+    - scipy==1.7.3
     - setuptools==60.5.0
     - terminado==0.12.1
     - tornado==6.1
