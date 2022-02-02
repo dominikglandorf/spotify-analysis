@@ -34,7 +34,13 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{xcolor}         % colors
-\usepackage{natbib}	
+\usepackage{natbib}
+\usepackage{siunitx} % Required for alignment
+\sisetup{
+  round-mode          = places, % Rounds numbers
+  round-precision     = 5, % to 2 places
+}
+	
 
 \bibliographystyle{unsrtnat}
 
@@ -96,6 +102,29 @@ Independently of the results of the data exploration, we planned to conduct a tw
 we calculated the 95\% HDI (highest density interval) that contains the 95\% of variance ratios that we most often encountered in the bootstrap procedure.
 
 \subsection{Results}
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{F-Tests for all 10 features}
+    \label{tab:table1}
+    \begin{tabular}{l|c|S} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{No.} & \textbf{Feature} & \textbf{F-value}\\
+      %$.$ & $Feature$ & $F-value$ \\
+      \hline
+      1 & danceability        &  2.507103**\\
+	  2 & energy              &  2.263637**\\
+	  3 & liveness            &  1.232870\\
+	  4 & loudness            &  9.271733**\\
+	  5 & speechiness         &  3.578650**\\
+	  6 & acousticness        &  1.807221*\\
+	  7 & instrumentalness    &642.007320**\\
+	  8 & tempo               &  1.199821\\
+	  9 & valence             &  1.217148\\
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
 % no real correlation
 % non-normal distribution of some features
 

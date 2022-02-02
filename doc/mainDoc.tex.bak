@@ -67,28 +67,82 @@
 \maketitle
 
 \begin{abstract}
-{Utilizing the Spotify API, we collect the metadata of a large set of tracks, notably the audio features, to assess the cliché of contemporary pop music being all the same.  
-  Utilizing pca to reduce the multi-dimensional data, shows already a difference between pop and non pop songs. Further analysis of variance shows, that the variability across certain audio features is indeed less in pop music when compared to non pop music, thereby confirming our initial hypothesis.}
+{In this work we investigate if popular music is less diverse. From Spotify, metadata of 28,195 tracks was collected, notably the audio features, to assess the cliché of contemporary pop music being all the same. To evaluate variability, a visual analysis via PCA and F-tests were conducted. The 2D plot showed already a visible difference between pop and non-pop songs. The analysis of variance confirmed that the variability across certain audio features is indeed less in pop music when compared to non pop music, thereby confirming our initial hypothesis. Consequently, we discussed issues of sampling bias and imbalanced data.}
   
 \end{abstract}
 
 \section{Introduction}
 
-Music is one of the oldest and most valued forms of communication and is therefore of particular interest. Yet, its underlying structure has been eluded systematic analysis until recently. Comparing numerous features across thousands of songs was to much data to handle with traditional methods of analysis. Accelerated computing and new mathematical methods allow now for systematic inquiry of music. Thus it is only now possible to hold common clichés about music proof to the real world data.\newline One of these clichés is, that pop music is all the same and less diverse then non popular music \citep[see for example][]{serra2012measuring}. Thus, our Hypothesis is, that the variability of pop music is smaller, then the one observed in non popular music.
+Music is one of the oldest and most valued forms of communication and is therefore of particular interest. Yet, its underlying structure has been eluded systematic analysis until recently. Comparing numerous features across thousands of songs was too much data to handle with traditional methods of analysis. Accelerated computing and freely accessible databases allow now for systematic inquiry of music. Thus it is only now possible to hold common clichés about music proof to the real world data.
+
+One of these clichés is, that pop music is all the same and less diverse then non popular music \citep[see for example][]{serra2012measuring}. Thus, our hypothesis is, that the variability of pop music is smaller, then the one observed in non popular music.
+
+Since Spotify is the worlds most used music streaming platform, it promises to be representative for global music listening taste.
+
+% What are "pop songs"? What do we mean by variability? What is an audio feature of a track? Declare them as our features and popularity as the label of interest, (terminology of machine learning, psychology terms could be included i.v., d.v.). Why do we think that this measures diversity? Maybe then outline of the subsequent sections 
 
 \section{Method}
 
-\subsection{Data}
-Since Spotify is the worlds most used music streaming platform, it promises to be representative for global music listening taste. Thus, the music data was obtained from the Spotify web API \citep{spotify}. For scraping the sample Spotify's search function was used in the following way: For each possible two letter combination the first 500 search results were stored. This led to a data set of \(26^{2} * 500 = 33'800\) songs. After controlling for potential similarity between titles 7'000 songs were removed. After removing duplicates the total sample encompassed \(N_{total} = 28'195\)  songs. 
-Spotify provides plenty of features for each song. We concentrated 
-on danceability, energy, liveness, loudness, speechiness, acousticness, instrumentalness, tempo, valence and key, as they allow for easy and intelligible  interpretations of the lofty term variability [Further explanation?]. The specific meaning of each of these features can be obtained from the documentation of the Spotify API \citep{spotifyAPIdocu}[table, or still explain here?]. In addition to these features, which provide information about the internal make-up of the song, spotify offered also a "popularity" feature. A value between 1 and 100 was assigned to each song song, with 100 being the most popular. We used this feature to assign our sample to two groups: the pop songs and the non pop songs. As 50 seems to be a suitable size for a hit parade and most of Spotify's own hit play-lists consist out of 50 songs, the \(n_{pop} = 48\) popular songs were assigned to the pop song group and the remainder \(n_{non pop} = 28'147\) to the non pop song group. 
+\subsection{Sample}
+The music metadata was obtained from the Spotify Web API \citep{spotify}. In order to compile our sample, the search endpoint was queried in the following way: For each possible single Latin letter and two letter combination the first 50 search results were stored. This led to a potential number of \(27 * 26 * 50 =\) 35,100 results. After eliminating duplicates in the result lists, the total sample encompassed \(N_{total} =\) 28,195 songs. The list of songs was then augmented by the results from the audio features endpoint. We concentrated on danceability, energy, liveness, loudness, speechiness, acousticness, instrumentalness, tempo, valence and key, as they allow for easy and intelligible interpretations of the lofty term variability % explain each feature, based on their documentation, % add why we dropped key as a non-ordinal (categorical) feature
+The specific meaning of each of these features can be obtained from the documentation of the Spotify API \citep{spotifyAPIdocu}[table, or still explain here?]. In addition to these features, which provide information about the internal make-up of the song, Spotify offered also a "popularity" feature. A value between 0 and 100 is assigned to each song, with 100 being the most popular. We used this feature to assign our sample to two groups: the pop songs and the non pop songs. An inspection of the current charts and music played regularly in the radio, led us to use a popularity threshold of 90. Using this limit, the \(n_{pop} = 70\) most popular songs were assigned to the pop song group and the remainder \(n_{non pop} = 28,125\) to the non pop song group.
 
 \subsection{Analysis}
-To better grasp the multi-dimensional data a PCA was conducted, reducing the ten initial dimensions to only two, which are illustrated in [Figure 1]. The there observed difference was further tested, by comparing the variances of each of the ten features between pop and non pop songs using f-tests. The respective histogr illustrated in [Figure 2].
+To ensure data quality and get a first idea of the data, we started the analysis by graphically and numerically checking the distributions of our audio features and the popularity in the sample. A correlogram served to see if we expect linear dependencies between our features and the label or between features.
+
+As stated above, we were interested in the variability of pop songs compared to the remainder. Hence, we first employed an exploratory and visual approach before running statistical tests. In order to search for an underlying structure in the audio features and to be able to get a first impression of the data as a whole we decided to do a dimensionality reduction via Principal Component Analysis (PCA). We decided against a stochastic neighbor embedding such as t-SNE since we only had 9 dimensions and believed in a global structure that might not be preserved by those methods. To be able to plot the principal components we chose the two components that explained the most variance. Since the PCA is agnostic to the grouping we indicated them in the visualization, in hope to see a structure.
+
+Independently of the results of the data exploration, we planned to conduct a two sample variance comparison on each audio feature. Based on our hypothesis, that did not comprised mean differences in the two groups but rather variance differences, the weapon of choice was a classical F-test for independent samples. Because we conducted multiple F-tests we used the conservative instrument of the Bonferroni correction to decide for significance. To further assess our estimation quality we did a bootstrap sampling from both groups and calculated the variance quotient, i.e. the F-statistic for each of them. According to % cite Krushke, Doing Bayesian Data Analysis here
+we calculated the 95\% HDI (highest density interval) that contains the 95\% of variance ratios that we most often encountered in the bootstrap procedure.
 
 \subsection{Results}
 
-\subsection{Discussion}
+\begin{table}[h!]
+  \begin{center}
+    \caption{F-Tests for all 10 features}
+    \label{tab:table1}
+    \begin{tabular}{l|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+      \textbf{No.} & \textbf{Feature} & \textbf{F-value}\\
+      %$.$ & $Feature$ & $F-value$ \\
+      \hline
+      1 & danceability        &  2.507103\\
+	  2 & energy              &  2.263637\\
+	  3 & liveness            &  1.232870\\
+	  4 & loudness            &  9.271733\\
+	  5 & speechiness         &  3.578650\\
+	  6 & acousticness        &  1.807221\\
+	  7 & instrumentalness    &642.007320\\
+	  8 & tempo               &  0.833457\\
+	  9 & valence             &  1.217148\\
+    \end{tabular}
+    \caption{Table to test captions and labels.}
+  \end{center}
+\end{table}
 
+
+% no real correlation
+% non-normal distribution of some features
+
+% use tueplots
+
+% PCA results
+
+% Variance tests results
+Tested against the Bonferroni-corrected critical F value [5] of these tests turned out significantly, whereas the rest remained above the threshold. % which audio features are significant?
+
+\subsection{Discussion}
+% is our sampling strategy adequate?
+
+
+% imbalanced data, justify why it is inherent in our analysis and why we think that our results are still not biased by this imbalance
+ It resulted  to be a suitable size for a hit parade, most of Spotify's own hit play-lists consist out of 50 songs, 
+-other features
+-other pop treshold (continous descibtion)
+% consider different markets/cultures, Spotify is heavily based to Western music, suggestion for further research, replicate our analysis for each countries charts
+
+% Future research idea: Check over time, if there is a change or manifestation in variance ratios.
+
+% Look at the output and repair capitalization and 
 \bibliography{library.bib}
+
 \end{document}
