@@ -1,5 +1,6 @@
-*.pdf
 *.aux
+src/*.pdf
+doc/*.pdf
 *.log
 *.gz
 *.out
