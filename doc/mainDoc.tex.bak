@@ -35,6 +35,7 @@
 \usepackage{microtype}      % microtypography
 \usepackage{xcolor}         % colors
 \usepackage{natbib}
+\usepackage[pdftex]{graphicx}
 \usepackage{siunitx} % Required for alignment
 \sisetup{
   round-mode          = places, % Rounds numbers
@@ -103,7 +104,17 @@ we calculated the 95\% HDI (highest density interval) that contains the 95\% of 
 
 \subsection{Results}
 
+\begin{figure}
+  \centering
+  \includegraphics[]{../fig/001_pca.pdf}
+  \caption{The projected sample on the first two principal components}
+\end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=1\linewidth]{../fig/002_variances.pdf}
+  \caption{Variances.}
+\end{figure}
 
 \begin{table}[h!]
   \caption{Significance-test}
@@ -142,6 +153,7 @@ Six of the tested features  % which audio features are significant?
 \subsection{Discussion}
 The variance of six of the evaluated nine features was significantly less in the pop-music group, if compared to the non-pop music group, hereby supporting our hypothesis of pop music being all the same.  
 The unusual high variance difference 
+Mixfeatures
 
 
 nine features between 
