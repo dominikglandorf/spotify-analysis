@@ -104,11 +104,15 @@ we calculated the 95\% HDI (highest density interval) that contains the 95\% of 
 
 \subsection{Results}
 
+In Figure \ref{fig:pca} a 2D-visualization of the projected data points is shown. The popular songs clearly spread over an area contained in the bandwidth of the remaining songs. The standard variance within the first two principal components (PC) is visualized via the ellipses around the group means. This underlines the visual impression of lower variance of the popular songs. The mean of them is positively shifted mainly on the first PC. To understand how the original features load onto the PCs their loadings are indicated in an arbitrary scale via the arrows originating from the data's origin. The first PC is mainly determined by loudness and energy (positive loading) as well as instrumentalness and acousticness (negative loading). This PC could be seen as the "pop" dimension since today's popular songs are generally known to be energetic and well-produced (which results in a higher loudness feature) and less instrumental or acoustic (since those are perceived as stripped versions of the original music). The second PC shows the same pattern of less variance in the pop songs, even though it is less prominent. It is mainly based on liveness, speechiness, valence, danceability and tempo. Due to the very small mean difference those features seem to be not different in popular songs yet less variant. From the dimensionality reduction we can conclude that popular music seems to be actually less diverse in terms of its audio features and is also different on average.
 \begin{figure}
   \centering
   \includegraphics[]{../fig/001_pca.pdf}
   \caption{The projected sample on the first two principal components}
+  \label{fig:pca}
 \end{figure}
+
+
 
 \begin{figure}
   \centering
@@ -143,10 +147,6 @@ we calculated the 95\% HDI (highest density interval) that contains the 95\% of 
 % no real correlation
 % non-normal distribution of some features
 
-% use tueplots
-
-% PCA results
-
 % Variance tests results
 Six of the tested features  % which audio features are significant?
 
@@ -159,6 +159,7 @@ nine features between
 
 
 % is our sampling strategy adequate?
+% are we okay with the blackbox calculation of our features?
 
 
 % imbalanced data, justify why it is inherent in our analysis and why we think that our results are still not biased by this imbalance
