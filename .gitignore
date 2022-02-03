@@ -8,3 +8,8 @@ doc/*.pdf
 .env
 .ipynb_checkpoints
 __pycache__
+*.bbl
+*.blg
+*.dvi
+*.bcf
+*.xml
