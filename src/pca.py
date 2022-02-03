@@ -1,6 +1,7 @@
 import numpy as np
 
 def PCA(data):
+    data = (data-data.mean(axis=0)) / data.std(axis=0)
     cov = 1 / data.shape[0] * data.T @ data
     values, vectors = np.linalg.eig(cov)
 
