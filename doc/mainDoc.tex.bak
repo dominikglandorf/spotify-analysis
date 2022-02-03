@@ -76,13 +76,13 @@ metadata of 28,195 tracks on Spotify was collected, notably their popularity and
 % What did we find out?
 A 2D-plot visually showed a difference between the groups. An analysis of variance confirmed that the diversity is indeed less in pop music, confirming our initial hypothesis.
 % What now?
-Conclusively, we discussed our findings' generalizability, challenged by a potential sampling bias. 
+Conclusively, we discussed our findings' generalizability , which is challenged by a potential sampling bias. 
 %and imbalanced data.
 \end{abstract}
 
 \section{Introduction}
 %Why are we interested in music?
-Music is one of the oldest and most valued forms of communication and therefore of particular interest. Yet, its underlying structure has been eluded systematic analysis until recently.
+Music is one of the oldest and most valued forms of communication and is therefore of particular interest. Yet, its underlying structure has been eluded systematic analysis until recently.
 % What can we contribute?
 Comparing numerous features across thousands of songs was too much data to handle with traditional tools of analysis. Accelerated computing and freely accessible databases allow now for systematic inquiry of a large music corpus. Thus, it is only now possible to hold common clichés about music proof to the real world data.
 % What is our research question?
@@ -90,7 +90,7 @@ One of these clichés is, that pop music is all the same and less diverse then n
 
 % What does music and popularity mean to us?
 % TODO: add source for usage statistics and number of tracks
-Since Spotify is the world's most used music streaming platform and offers one of the largest corpora of music \citep{quarterlyReport}, it promises it to be representative for global listening preferences. For this reason, we rely on this single platform to define what is considered as music, as well as what is considered as popular music. Spotify's massive amount of listening data allows for determining which songs are popular and its meta knowledge allows us to examine music out of a quantitative perspective.
+Since Spotify is the world's most used music streaming platform and offers one of the largest corpora of music \citep{quarterlyReport}. This promises it to be representative for global listening preferences. It additionally  . For this reason, we rely on this single platform to define what is considered as music, as well as what is considered as popular music. Spotify's massive amount of listening data allows for determining which songs are popular and its meta knowledge allows us to examine music out of a quantitative perspective.
 % What is variability?
 We define variability (and synonymously diversity) in the statistical sense of variance, i.e. the average squared distance from the mean. This variability between songs, is expected to be reflected in objective measures like tempo, or more subjective ones like "danceability".  The latter, rather ambiguous properties such as the "danceability" that Spotify is able to determine due to usage statistics and/or audio analysis.
 
