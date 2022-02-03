@@ -6,6 +6,5 @@ doc/*.pdf
 *.out
 .DS_store
 .env
-exp/.ipynb_checkpoints
-*.bak
+.ipynb_checkpoints
 __pycache__
