@@ -1,4 +1,4 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{4}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -12,15 +12,20 @@ Joan Serr{\`a}, {\'A}lvaro Corral, Mari{\'a}n Bogu{\~n}{\'a}, Mart{\'\i}n Haro,
 \newblock Measuring the evolution of contemporary western popular music.
 \newblock \emph{Scientific reports}, 2\penalty0 (1):\penalty0 1--6, 2012.
 
-\bibitem[SpotifyInc.()]{spotify}
-SpotifyInc.
-\newblock Spotifyapi.
-\newblock URL \url{https://developer.spotify.com/documentation/web-api/}.
-
-\bibitem[SpotifyDocu()]{spotifyAPIdocu}
+\bibitem[SpotifyDocu(2022)]{spotifyAPIdocu}
 SpotifyDocu.
-\newblock Spotifyapidocumentation.
+\newblock Spotifyapidocu, 2022.
 \newblock URL
   \url{https://developer.spotify.com/documentation/web-api/reference/#/operations/get-audio-features}.
+
+\bibitem[Snedecor and Cochran(1989)]{snedecor1989}
+George~W. Snedecor and William~G. Cochran.
+\newblock \emph{Statistical Methods}.
+\newblock Iowa State University Press, eighth edition, 1989.
+
+\bibitem[Kruschke(2014)]{kruschke2014doing}
+John Kruschke.
+\newblock Doing bayesian data analysis: A tutorial with r, jags, and stan.
+\newblock 2014.
 
 \end{thebibliography}

@@ -38,7 +38,7 @@
 \usepackage{siunitx} % Required for alignment
 \sisetup{
   round-mode          = places, % Rounds numbers
-  round-precision     = 5, % to 2 places
+  round-precision     = 2, % to 2 places
 }
 	
 
@@ -73,7 +73,7 @@
 \maketitle
 
 \begin{abstract}
-{In this work we investigate if popular music is less diverse. From Spotify, metadata of 28,195 tracks was collected, notably the audio features, to assess the cliché of contemporary pop music being all the same. To evaluate variability, a visual analysis via PCA and F-tests were conducted. The 2D plot showed already a visible difference between pop and non-pop songs. The analysis of variance confirmed that the variability across certain audio features is indeed less in pop music when compared to non pop music, thereby confirming our initial hypothesis. Consequently, we discussed issues of sampling bias and imbalanced data.}
+{In this work we investigate if popular music is less diverse. From Spotify, metadata of 28,195 tracks was collected, notably the audio features, to assess the cliché of contemporary pop music being all the same. To evaluate variability, a visual analysis via PCA and F-tests were conducted. The 2D plot showed already a visible difference between pop and non-pop songs. The analysis of variance confirmed that the variability across certain audio features is indeed less in pop music when compared to non-pop music, thereby confirming our initial hypothesis. Consequently, we discussed issues of sampling bias and imbalanced data.}
   
 \end{abstract}
 
@@ -81,7 +81,7 @@
 
 Music is one of the oldest and most valued forms of communication and is therefore of particular interest. Yet, its underlying structure has been eluded systematic analysis until recently. Comparing numerous features across thousands of songs was too much data to handle with traditional methods of analysis. Accelerated computing and freely accessible databases allow now for systematic inquiry of music. Thus it is only now possible to hold common clichés about music proof to the real world data.
 
-One of these clichés is, that pop music is all the same and less diverse then non popular music \citep[see for example][]{serra2012measuring}. Thus, our hypothesis is, that the variability of pop music is smaller, then the one observed in non popular music.
+One of these clichés is, that pop music is all the same and less diverse then non-popular music \citep[see for example][]{serra2012measuring}. Thus, our hypothesis is, that the variability of pop music is smaller, then the one observed in non-popular music.
 
 Since Spotify is the worlds most used music streaming platform, it promises to be representative for global music listening taste.
 
@@ -90,38 +90,42 @@ Since Spotify is the worlds most used music streaming platform, it promises to b
 \section{Method}
 
 \subsection{Sample}
-The music metadata was obtained from the Spotify Web API \citep{spotify}. In order to compile our sample, the search endpoint was queried in the following way: For each possible single Latin letter and two letter combination the first 50 search results were stored. This led to a potential number of \(27 * 26 * 50 =\) 35,100 results. After eliminating duplicates in the result lists, the total sample encompassed \(N_{total} =\) 28,195 songs. The list of songs was then augmented by the results from the audio features endpoint. We concentrated on danceability, energy, liveness, loudness, speechiness, acousticness, instrumentalness, tempo, valence and key, as they allow for easy and intelligible interpretations of the lofty term variability % explain each feature, based on their documentation, % add why we dropped key as a non-ordinal (categorical) feature
-The specific meaning of each of these features can be obtained from the documentation of the Spotify API \citep{spotifyAPIdocu}[table, or still explain here?]. In addition to these features, which provide information about the internal make-up of the song, Spotify offered also a "popularity" feature. A value between 0 and 100 is assigned to each song, with 100 being the most popular. We used this feature to assign our sample to two groups: the pop songs and the non pop songs. An inspection of the current charts and music played regularly in the radio, led us to use a popularity threshold of 90. Using this limit, the \(n_{pop} = 70\) most popular songs were assigned to the pop song group and the remainder \(n_{non pop} = 28,125\) to the non pop song group.
+The music metadata was obtained from the Spotify Web API \citep{spotifyAPIdocu}. In order to compile our sample, the search endpoint was queried in the following way: For each possible single Latin letter and two letter combination the first 50 search results were stored. This led to a potential number of \(27 * 26 * 50 =\) 35,100 results. After eliminating duplicates in the result lists, the total sample encompassed \(N_{total} =\) 28,195 songs. The list of songs was then augmented by the results from the audio features endpoint. We concentrated on danceability, energy, liveness, loudness, speechiness, acousticness, instrumentalness, tempo, valence and key, as they allow for easy and intelligible interpretations of the lofty term variability % explain each feature, based on their documentation, % add why we dropped key as a non-ordinal (categorical) feature
+The specific meaning of each of these features can be obtained from the documentation of the Spotify API \citep{spotifyAPIdocu}[table, or still explain here?]. In addition to these features, which provide information about the internal make-up of the song, Spotify offered also a "popularity" feature. A value between 0 and 100 is assigned to each song, with 100 being the most popular. We used this feature to assign our sample to two groups: the pop songs and the non-pop songs. An inspection of the current charts and music played regularly in the radio, led us to use a popularity threshold of 90. Using this limit, the \(n_{pop} = 70\) most popular songs were assigned to the pop song group and the remainder \(n_{non pop} = 28,125\) to the non pop song group.
 
 \subsection{Analysis}
 To ensure data quality and get a first idea of the data, we started the analysis by graphically and numerically checking the distributions of our audio features and the popularity in the sample. A correlogram served to see if we expect linear dependencies between our features and the label or between features.
 
 As stated above, we were interested in the variability of pop songs compared to the remainder. Hence, we first employed an exploratory and visual approach before running statistical tests. In order to search for an underlying structure in the audio features and to be able to get a first impression of the data as a whole we decided to do a dimensionality reduction via Principal Component Analysis (PCA). We decided against a stochastic neighbor embedding such as t-SNE since we only had 9 dimensions and believed in a global structure that might not be preserved by those methods. To be able to plot the principal components we chose the two components that explained the most variance. Since the PCA is agnostic to the grouping we indicated them in the visualization, in hope to see a structure.
 
-Independently of the results of the data exploration, we planned to conduct a two sample variance comparison on each audio feature. Based on our hypothesis, that did not comprised mean differences in the two groups but rather variance differences, the weapon of choice was a classical F-test for independent samples. Because we conducted multiple F-tests we used the conservative instrument of the Bonferroni correction to decide for significance. To further assess our estimation quality we did a bootstrap sampling from both groups and calculated the variance quotient, i.e. the F-statistic for each of them. According to % cite Krushke, Doing Bayesian Data Analysis here
-we calculated the 95\% HDI (highest density interval) that contains the 95\% of variance ratios that we most often encountered in the bootstrap procedure.
+Independently of the results of the data exploration, we planned to conduct a two sample variance comparison on each audio feature \citep{snedecor1989}. Based on our hypothesis, that did not comprised mean differences in the two groups but rather variance differences, the weapon of choice was a classical F-test for independent samples. Because we conducted multiple F-tests we used the conservative instrument of the Bonferroni correction to decide for significance. To further assess our estimation quality we did a bootstrap sampling from both groups and calculated the variance quotient, i.e. the F-statistic for each of them. According to  here \cite{kruschke2014doing}
+we calculated the 95\% HDI (highest density interval) that contains the 95\% of variance ratios that we most often encountered in the bootstrap procedure .
 
 \subsection{Results}
 
+
+
 \begin{table}[h!]
-  \begin{center}
-    \caption{F-Tests for all 10 features}
-    \label{tab:table1}
-    \begin{tabular}{l|c|S} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
-      \textbf{No.} & \textbf{Feature} & \textbf{F-value}\\
-      %$.$ & $Feature$ & $F-value$ \\
-      \hline
-      1 & danceability        &  2.507103**\\
-	  2 & energy              &  2.263637**\\
-	  3 & liveness            &  1.232870\\
-	  4 & loudness            &  9.271733**\\
-	  5 & speechiness         &  3.578650**\\
-	  6 & acousticness        &  1.807221*\\
-	  7 & instrumentalness    &642.007320**\\
-	  8 & tempo               &  1.199821\\
-	  9 & valence             &  1.217148\\
-    \end{tabular}
-  \end{center}
+  \caption{Significance-test}
+  \label{sample-table}
+  \centering
+  \begin{tabular}{lllc}
+    \toprule
+      &                     &  Results    &\\
+    \cmidrule(r){3-4}
+    No.     & Feature     & F-value & Range\\
+    \midrule
+    1 & danceability        &  2.50** &\\
+	2 & energy              &  2.26** &\\
+	3 & liveness            &  1.23   &\\
+	4 & loudness            &  9.27** &\\
+	5 & speechiness         &  3.57** &\\
+	6 & acousticness        &  1.80*  &\\
+	7 & instrumentalness    &642.00** &\\
+	8 & tempo               &  0.83   &\\
+	9 & valence             &  1.21   &\\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
 
@@ -133,9 +137,16 @@ we calculated the 95\% HDI (highest density interval) that contains the 95\% of 
 % PCA results
 
 % Variance tests results
-Tested against the Bonferroni-corrected critical F value [5] of these tests turned out significantly, whereas the rest remained above the threshold. % which audio features are significant?
+Six of the tested features  % which audio features are significant?
 
 \subsection{Discussion}
+The variance of six of the evaluated nine features was significantly less in the pop-music group, if compared to the non-pop music group, hereby supporting our hypothesis of pop music being all the same.  
+The unusual high variance difference 
+
+
+nine features between 
+
+
 % is our sampling strategy adequate?
 
 

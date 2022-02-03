@@ -5,57 +5,46 @@ Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: unsrtnat.bst
 Reallocating 'name_of_file' (item size: 1) to 12 items.
 Database file #1: library.bib
-I was expecting a `,' or a `}'---line 15 of file library.bib
- :   
- :   year={2022}
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 21 of file library.bib
- :   
- :   year={2022}
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--empty year in spotify
-Warning--empty year in spotifyAPIdocu
-You've used 3 entries,
+Warning--empty journal in kruschke2014doing
+You've used 4 entries,
             2481 wiz_defined-function locations,
-            567 strings with 4903 characters,
-and the built_in function-call counts, 974 in all, are:
-= -- 74
-> -- 47
-< -- 2
-+ -- 20
-- -- 14
-* -- 65
-:= -- 160
-add.period$ -- 9
-call.type$ -- 3
-change.case$ -- 6
-chr.to.int$ -- 3
+            575 strings with 5041 characters,
+and the built_in function-call counts, 1283 in all, are:
+= -- 100
+> -- 62
+< -- 3
++ -- 26
+- -- 18
+* -- 84
+:= -- 214
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 8
+chr.to.int$ -- 4
 cite$ -- 5
-duplicate$ -- 47
-empty$ -- 95
-format.name$ -- 17
-if$ -- 199
+duplicate$ -- 70
+empty$ -- 123
+format.name$ -- 24
+if$ -- 265
 int.to.chr$ -- 1
-int.to.str$ -- 4
-missing$ -- 1
-newline$ -- 23
-num.names$ -- 9
-pop$ -- 31
+int.to.str$ -- 5
+missing$ -- 4
+newline$ -- 28
+num.names$ -- 12
+pop$ -- 41
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 4
 quote$ -- 0
-skip$ -- 37
+skip$ -- 45
 stack$ -- 0
-substring$ -- 19
-swap$ -- 6
+substring$ -- 21
+swap$ -- 7
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 21
-warning$ -- 2
-while$ -- 8
+type$ -- 25
+warning$ -- 1
+while$ -- 10
 width$ -- 0
-write$ -- 42
-(There were 2 error messages)
+write$ -- 56
+(There was 1 warning)
