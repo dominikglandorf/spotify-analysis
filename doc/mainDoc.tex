@@ -41,7 +41,7 @@
 	
 \bibliographystyle{unsrtnat}
 
-% we did not really do a clustering
+
 \title{Spotify metadata: Pop music is really less diverse}
 
 % The \author macro works with any number of authors. There are two commands
@@ -84,15 +84,15 @@ Conclusively, we discussed our findings' generalizability, challenged by a poten
 %Why are we interested in music?
 Music is one of the oldest and most valued forms of communication and therefore of particular interest. Yet, its underlying structure has been eluded systematic analysis until recently.
 % What can we contribute?
-Comparing numerous features across thousands of songs was too much data to handle with traditional tools of analysis. Accelerated computing and freely accessible databases allow now for systematic inquiry of a large music corpus. Thus, it is only now possible to hold common clichés about music proof to the real world data.
+Accelerated computing and freely accessible databases allow now for systematic inquiry of numerous features across thousands of songs. Thus, it is only now possible to hold common clichés about music proof to the real world data.
 % What is our research question?
 One of these clichés is, that pop music is all the same and less diverse then non-popular music \citep{serra2012measuring}. Thus, our hypothesis is, that the variability of pop music is smaller than the one observed in non-popular music.
 
 % What does music and popularity mean to us?
 % TODO: add source for usage statistics and number of tracks
-Since Spotify is the world's most used music streaming platform and offers one of the largest corpora of music \citep{quarterlyReport}, it promises it to be representative for global listening preferences. For this reason, we rely on this single platform to define what is considered as music, as well as what is considered as popular music. Spotify's massive amount of listening data allows for determining which songs are popular and its meta knowledge allows us to examine music out of a quantitative perspective.
+Since Spotify is the world's most used music streaming platform and offers one of the largest corpora of music \citep{quarterlyReport}, it promises it to be representative for global listening preferences. For this reason, we rely on this single platform to define what is considered as music, as well as what is considered as popular music. Spotify's massive amount of listening data allows to assess which songs are popular and its meta knowledge eases the examination of music out of a quantitative perspective.
 % What is variability?
-We define variability (and synonymously diversity) in the statistical sense of variance, i.e. the average squared distance from the mean. This variability between songs, is expected to be reflected in objective measures like tempo, or more subjective ones like "danceability".  The latter, rather ambiguous properties such as the "danceability" that Spotify is able to determine due to usage statistics and/or audio analysis.
+We define variability (and synonymously diversity) in the statistical sense of variance, i.e. the average squared distance from the mean. This variability between songs, is expected to be reflected in objective measures like tempo, or more subjective ones like "danceability".  The latter, rather ambiguous properties such as the "danceability" are calculated by Spotify utilising usage statistics and audio analysis.
 
 \section{Method}
 
@@ -102,12 +102,10 @@ We define variability (and synonymously diversity) in the statistical sense of v
 
 \subsection{Sample}
 % Where did we get the data exactly from?
-The music metadata was obtained from the Spotify Web API \citep{spotifyAPIdocu}.
 % How did exactly did we request our data?
-In order to compile our sample, the search endpoint was queried in the following way: For each possible single Latin letter and two letter combination, the 50 first search results including their popularity score were stored. After eliminating duplicates in the result lists, the total sample encompassed 28,195 songs. The list of songs was then augmented by the results from the audio features endpoint.
+Our sample was obtained from the Spotify audio endpoint in the following way: For each possible single Latin letter and two letter combination, the 50 first search results including their popularity score were stored. After eliminating duplicates in the result lists, the total sample encompassed 28,195 songs. To the list of songs were then added the metadata of the Spotify Web API \citep{spotifyDocu}.
 % What are the columns/groups of our dataset?  
-The obtained features are explained in Table \ref{tab:features}. We defined a song being a pop song, if is popularity value is equal or above 90. This threshold leads to 70 songs being popular. This number comes close to the number of songs in current charts, or in the present radio repertoire led us to the admittedly arbitrary threshold of 90 
-70 songs fulfilled this criterion, and were then assigned to the pop song group. The remainder of 28,125 was assigned to the non-pop song group.
+The obtained features are explained in Table \ref{tab:features}. We defined a song being a pop song, if is popularity value is equal or above 90. 70 songs fulfilled this criterion, and were then assigned to the pop song group. The remainder of 28,125 was assigned to the non-pop song group. 
 
 \begin{figure}
   \centering
@@ -115,6 +113,30 @@ The obtained features are explained in Table \ref{tab:features}. We defined a so
   \caption{The projected sample on the first two principal components}
   \label{fig:pca}
 \end{figure}
+
+\begin{table}[h!]
+  \caption{Variance test results}
+  \label{tab:var}
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    Feature     & Description\\
+    \midrule
+	danceability        	& Describes how suitable a track is for dancing based on a combination of musical elements   \\
+	energy              	&  Represents a perceptual measure of intensity and activity from 0.0 to 1.0\\
+	liveness            	&  Detects the presence of an audience in the recording\\
+	loudness            	&  The overall loudness of a track in decibels (dB)\\
+	speechiness         	&  Detects the presence of spoken words in a track\\
+	acousticness        	& A confidence measure from 0.0 to 1.0 of whether the track is acoustic	\\
+	instrumentalness    	&	Predicts whether a track contains no vocals. \\
+	tempo               	&  The overall estimated tempo of a track in beats per minute (BPM)\\
+	valence             	& Describing the musical positiveness conveyed by a track from 0.0 to 1.0\\
+	\midrule
+	popularity           &  A value from 0 to 100 is assigned to each song, 100 being the most popular\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 
 \subsection{Analysis}
 % How did we ensure our data are appropriate?
@@ -124,8 +146,8 @@ To ensure data quality, we first graphically and numerically checked the distrib
 As stated above, we were interested in the variability of pop songs compared to the remainder. Hence, we first employed an exploratory and visual approach before running statistical tests. In order to search for an underlying structure in the audio features and to be able to get a first impression of the data as a whole, we decided to do a dimensionality reduction via Principal Component Analysis (PCA). We did not use a stochastic neighbour embedding such as t-SNE since we only have nine dimensions and assumed a global structure that might not be preserved by those methods. To be able to plot the principal components we chose the two components that explained the most variance. Since the PCA is agnostic to the grouping we indicated the class labels in the visualization, in hope to see a structure. If there are common components in the feature space it is probable that we already see a difference in variance in the visualized data.
 
 % How did we statistically approached our hypothesis?
-Independently of the results of the data exploration, we planned to conduct a two sample variance comparison on each audio feature \citep{snedecor1989}. Based on our hypothesis, that did not comprised mean differences in the two groups but rather variance differences, the method of choice was a classical F-test for independent samples. To account for our multiple tests, we corrected our critical f-value using the Bonferroni Method. To further assess robustness of our point estimation, we ran a bootstrap sampling from both groups and calculated the variance quotient, i.e. the F-statistic for each of the 10,000 resampled pairs of groups. According to \cite{kruschke2014doing}
-we calculated the 95\% highest density interval (HDI) that contains the 95\% of variance ratios that we most often encountered in the bootstrap procedure. This has the advantage of getting an interval in which we expect our statistic to be with a high confidence if we resample the data and let us corroborate the F-test results.
+Independently of the results of the data exploration, we planned to conduct a two sample variance comparison on each audio feature \citep{snedecor1989}. Since our hypothesis, was not comprised out of mean differences in the two groups but rather on variance differences, the method of choice was a classical F-test for independent samples. To account for our multiple tests, we corrected our critical f-value using the Bonferroni method. To further assess robustness of our point estimation, we ran a bootstrap sampling from both groups and calculated the variance quotient, i.e. the F-statistic for each of the 10,000 resampled pairs of groups. According to \cite{kruschke2014doing}
+we calculated the 95\% highest density interval (HDI) that contains the 95\%  most often encountered variance ratios obtained in the bootstrap procedure. This allows for corrobating the F-test results, because we get an interval, in which we expect our statistics to lie with a high confidence after re sampling the data.
 
 \section{Results}
 
@@ -138,7 +160,8 @@ we calculated the 95\% highest density interval (HDI) that contains the 95\% of 
   \caption{Variances.}
 \end{figure}
 
-We will first evaluate our graphical analysis, then the statistical procedures to find out if there are different variabilities in the two groups. In Figure \ref{fig:pca} a 2D-visualization of the projected data points is shown. The popular songs clearly spread over an area contained in the bandwidth of the remaining songs. The standard variance within the first two principal components (PC) is visualized via the ellipses around the group means. This underlines the visual impression of lower variance of the popular songs. The mean of them is positively shifted mainly on the first PC. To understand how the original features load onto the PCs their loadings are indicated in an arbitrary scale via the arrows originating from the data's origin. The first PC is mainly determined by loudness and energy (positive loading) as well as instrumentalness and acousticness (negative loading). This PC could be seen as the "pop" dimension since today's popular songs are generally known to be energetic and well-produced (which results in a higher loudness feature) and less instrumental or acoustic (since those are perceived as stripped versions of the original music). The second PC shows the same pattern of less variance in the pop songs, even though it is less prominent. It is mainly based on liveness, speechiness, valence, danceability and tempo. Due to the very small mean difference those features seem to be not different in popular songs yet less variant. From the dimensionality reduction we can conclude that popular music seems to be actually less diverse in terms of its audio features and is also different on average.
+%We will first evaluate our graphical analysis, then the statistical procedures to find out if there are different variabilities in the two groups. 
+In Figure \ref{fig:pca} a 2D-visualization of the projected data points is shown. The popular songs clearly spread over an area contained in the bandwidth of the remaining songs. The standard variance within the first two principal components (PC) is visualized via the ellipses around the group means. This underlines the visual impression of lower variance of the popular songs. The mean of them is positively shifted mainly on the first PC. To understand how the original features load onto the PCs their loadings are indicated in an arbitrary scale via the arrows originating from the data's origin. The first PC is mainly determined by loudness and energy (positive loading) as well as instrumentalness and acousticness (negative loading). This PC could be seen as the "pop" dimension since today's popular songs are generally known to be energetic and well-produced (which results in a higher loudness feature) and less instrumental or acoustic (since those are perceived as stripped versions of the original music). The second PC shows the same pattern of less variance in the pop songs, even though it is less prominent. It is mainly based on liveness, speechiness, valence, danceability and tempo. Due to the very small mean difference those features seem not to be different in popular songs, yet less variant. From the dimensionality reduction we can conclude that popular music seems to be actually less diverse in terms of its audio features and shows average differences.
 
 \begin{table}[h!]
   \caption{Variance test results}
@@ -160,6 +183,7 @@ We will first evaluate our graphical analysis, then the statistical procedures t
     \bottomrule
   \end{tabular}
 \end{table}
+
 % TODO: caption explaining meaning of *
 
 % F-test/Variance tests results
@@ -178,12 +202,12 @@ Even though we could not gather any intelligence about how the feature values we
 % A: We were interested in the most popular songs and they are very likely to be output first by the search function. Nonetheless we do not really know if the remainder is really representative for "unpopular songs". Maybe people refer to "less known but still listened by fans" music instead of the big tail of never listened songs on spotify? 
 Our specific sampling strategy is very likely to have caught all of the songs, one would consider popular, nevertheless the remainder is sampled inadequately. For each letter combination we only took the fifty most popular songs, thereby omitting the really unpopular songs. Thus, our reference group is rather comprised out of "mediocre songs", then out of songs, which are not popular at all.   
 % imbalanced data, justify why it is inherent in our analysis and why we think that our results are still not biased by this imbalance
-Being popular often encompasses being sparse. So the tremendous sample size differences are inherent to our analysis. We accounted for it by using F-tests, which are quite robust against said differences. Furthermore, bootstrapping does not make any assumption about the distribution at all. 
+The size of our pop song group reflects the length of Spotify's own Top Playlist and resembles the present radio repetoire. Furthermore, being popular often encompasses being sparse. So the tremendous sample size differences are inherent to our analysis. We accounted for it by using F-tests, which are quite robust against said differences. Furthermore, bootstrapping does not make any assumption about the distribution at all. 
 % Q: Outlook and Future research ideas:% 
 %the analysis should be redone with another pop threshold or using it categorically (for example 10 groups of popularity)
 % A1: consider different markets/cultures, Spotify is heavily biased to Western music, replicate our analysis for each countries charts
 % A2: Check over time, if there is a change or manifestation in variance ratios to have better robustness estimation than bootstrap.
-Further studies might explore how a different interpretation of popularity would affect the analysis. For example our quite arbitrarily chosen threshold could be lowered, or popularity could be treated as categorically or even continuous variable. Albeit disproportionate growth in non western markets, these are still under-represented and a specific focus on the diversity of the music there, could be fruitful. Lastly a better way of testing our hypothesis was to elicit the data over time - which we had not. The resulting time series would allow for a better robustness, then the methods applied by us.  
+Further studies might explore how a different interpretation of popularity would affect the analysis. For example our quite arbitrarily chosen threshold could be lowered, or popularity could be treated as categorically or even continuous variable. Albeit disproportionate growth in non western markets, these are still under-represented and a specific focus on the diversity of the music there, could be fruitful. Lastly a better way of testing our hypothesis was to elicit the data over time - which we had not. The resulting time series would allow for a better robustness, then the methods applied by us. Aiding in better understanding one of our oldest forms of communication - music.   
 
 
 % TODO: Look at the output and repair capitalization and 
