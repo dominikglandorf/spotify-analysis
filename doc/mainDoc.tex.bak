@@ -86,19 +86,14 @@ Music is one of the oldest and most valued forms of communication and therefore 
 % What can we contribute?
 Accelerated computing and freely accessible databases allow now for systematic inquiry of numerous features across thousands of songs. Thus, it is only now possible to hold common clichés about music proof to the real world data.
 % What is our research question?
-One of these clichés is, that pop music is all the same and less diverse then non-popular music \citep{serra2012measuring}. Thus, our hypothesis is, that the variability of pop music is smaller than the one observed in non-popular music.
-
+One of these clichés is, that pop music is all the same and less diverse then non-popular music \citep{serra2012measuring}. Thus, our hypothesis is, that the variability of pop music is smaller than the one observed in non-popular music.\newline
 % What does music and popularity mean to us?
 % TODO: add source for usage statistics and number of tracks
 Since Spotify is the world's most used music streaming platform and offers one of the largest corpora of music \citep{quarterlyReport}, it promises it to be representative for global listening preferences. For this reason, we rely on this single platform to define what is considered as music, as well as what is considered as popular music. Spotify's massive amount of listening data allows to assess which songs are popular and its meta knowledge eases the examination of music out of a quantitative perspective.
 % What is variability?
-We define variability (and synonymously diversity) in the statistical sense of variance, i.e. the average squared distance from the mean. This variability between songs, is expected to be reflected in objective measures like tempo, or more subjective ones like "danceability".  The latter, rather ambiguous properties such as the "danceability" are calculated by Spotify utilising usage statistics and audio analysis.
+We define variability (and synonymously diversity) in the statistical sense of variance, i.e. the average squared distance from the mean. This variability between songs, is expected to be reflected in objective measures like tempo, or more subjective ones like "danceability".  The latter, ambiguous properties  are calculated by Spotify utilising usage statistics and audio analysis.
 
 \section{Method}
-
-% TODO: add table here to list features:
-% danceability, energy, liveness, loudness, speechiness, acousticness, instrumentalness, tempo, valence and key,
-% Popularity: A value between 0 and 100 is assigned to each song, with 100 being the most popular.
 
 \subsection{Sample}
 % Where did we get the data exactly from?
@@ -107,22 +102,22 @@ Our sample was obtained from the Spotify audio endpoint in the following way: Fo
 % What are the columns/groups of our dataset?  
 The obtained features are explained in Table \ref{tab:features}. We defined a song being a pop song, if is popularity value is equal or above 90. 70 songs fulfilled this criterion, and were then assigned to the pop song group. The remainder of 28,125 was assigned to the non-pop song group. 
 
-\begin{figure}
+%use [!t] to move figures, figure* is required
+\begin{figure*}[!b]
   \centering
   \includegraphics[]{../fig/001_pca.pdf}
+  \vspace*{-8mm}  
   \caption{The projected sample on the first two principal components}
   \label{fig:pca}
-\end{figure}
+\end{figure*}
 
-\begin{table}[h!]
-  \caption{Variance test results}
-  \label{tab:var}
+\begin{table}[t]
   \centering
   \begin{tabular}{ll}
     \toprule
     Feature     & Description\\
     \midrule
-	danceability        	& Describes how suitable a track is for dancing based on a combination of musical elements   \\
+	danceability        	& Describes how suitable a track is for dancing  \\
 	energy              	&  Represents a perceptual measure of intensity and activity from 0.0 to 1.0\\
 	liveness            	&  Detects the presence of an audience in the recording\\
 	loudness            	&  The overall loudness of a track in decibels (dB)\\
@@ -130,11 +125,14 @@ The obtained features are explained in Table \ref{tab:features}. We defined a so
 	acousticness        	& A confidence measure from 0.0 to 1.0 of whether the track is acoustic	\\
 	instrumentalness    	&	Predicts whether a track contains no vocals. \\
 	tempo               	&  The overall estimated tempo of a track in beats per minute (BPM)\\
-	valence             	& Describing the musical positiveness conveyed by a track from 0.0 to 1.0\\
+	valence             	& Describes the musical positiveness conveyed by a track from 0.0 to 1.0\\
 	\midrule
-	popularity           &  A value between 0 and 100 is assigned to each song, with 100 being the most popular\\
+	popularity           &  A value from 0 to 100 is assigned to each song, 100 being the most popular\\
     \bottomrule
   \end{tabular}
+  \vspace*{5mm}
+  \caption{The inspected features}
+  \label{tab:features}
 \end{table}
 
 
@@ -146,7 +144,7 @@ To ensure data quality, we first graphically and numerically checked the distrib
 As stated above, we were interested in the variability of pop songs compared to the remainder. Hence, we first employed an exploratory and visual approach before running statistical tests. In order to search for an underlying structure in the audio features and to be able to get a first impression of the data as a whole, we decided to do a dimensionality reduction via Principal Component Analysis (PCA). We did not use a stochastic neighbour embedding such as t-SNE since we only have nine dimensions and assumed a global structure that might not be preserved by those methods. To be able to plot the principal components we chose the two components that explained the most variance. Since the PCA is agnostic to the grouping we indicated the class labels in the visualization, in hope to see a structure. If there are common components in the feature space it is probable that we already see a difference in variance in the visualized data.
 
 % How did we statistically approached our hypothesis?
-Independently of the results of the data exploration, we planned to conduct a two sample variance comparison on each audio feature \citep{snedecor1989}. Since our hypothesis, was not comprised out of mean differences in the two groups but rather on variance differences, the method of choice was a classical F-test for independent samples. To account for our multiple tests, we corrected our critical f-value using the Bonferroni method. To further assess robustness of our point estimation, we ran a bootstrap sampling from both groups and calculated the variance quotient, i.e. the F-statistic for each of the 10,000 resampled pairs of groups. According to \cite{kruschke2014doing}
+Independently of the results of the data exploration, we planned to conduct a two sample variance comparison on each audio feature \citep{snedecor1989}. Since our hypothesis, was not comprised out of mean differences in the two groups but rather on variance differences, the method of choice was a classical F-test for independent samples. To account for our multiple tests, we corrected our critical f-value using the Bonferroni method. To further assess robustness of our point estimation, we ran a bootstrap sampling from both groups and calculated the variance quotient, i.e. the F-statistic for each of the 10,000 resampled pairs of groups. According to \cite{kruschke2014}.
 we calculated the 95\% highest density interval (HDI) that contains the 95\%  most often encountered variance ratios obtained in the bootstrap procedure. This allows for corrobating the F-test results, because we get an interval, in which we expect our statistics to lie with a high confidence after re sampling the data.
 
 \section{Results}
@@ -156,15 +154,15 @@ we calculated the 95\% highest density interval (HDI) that contains the 95\%  mo
 \begin{figure}
   \centering
   \includegraphics[width=1\linewidth]{../fig/002_variances.pdf}
-  \vspace*{-15mm}
-  \caption{Variances.}
+  \vspace*{-8mm}
+  \caption{Variances of all inspected features}
 \end{figure}
 
 %We will first evaluate our graphical analysis, then the statistical procedures to find out if there are different variabilities in the two groups. 
 In Figure \ref{fig:pca} a 2D-visualization of the projected data points is shown. The popular songs clearly spread over an area contained in the bandwidth of the remaining songs. The standard variance within the first two principal components (PC) is visualized via the ellipses around the group means. This underlines the visual impression of lower variance of the popular songs. The mean of them is positively shifted mainly on the first PC. To understand how the original features load onto the PCs their loadings are indicated in an arbitrary scale via the arrows originating from the data's origin. The first PC is mainly determined by loudness and energy (positive loading) as well as instrumentalness and acousticness (negative loading). This PC could be seen as the "pop" dimension since today's popular songs are generally known to be energetic and well-produced (which results in a higher loudness feature) and less instrumental or acoustic (since those are perceived as stripped versions of the original music). The second PC shows the same pattern of less variance in the pop songs, even though it is less prominent. It is mainly based on liveness, speechiness, valence, danceability and tempo. Due to the very small mean difference those features seem not to be different in popular songs, yet less variant. From the dimensionality reduction we can conclude that popular music seems to be actually less diverse in terms of its audio features and shows average differences.
 
 \begin{table}[h!]
-  \caption{Variance test results}
+  
   \label{tab:var}
   \centering
   \begin{tabular}{lllc}
@@ -182,6 +180,8 @@ In Figure \ref{fig:pca} a 2D-visualization of the projected data points is shown
 	valence             	&  1.21   & [1.01; 1.43]\\
     \bottomrule
   \end{tabular}
+  \vspace*{3mm}
+  \caption{Variance test and bootstrapping results}
 \end{table}
 
 % TODO: caption explaining meaning of *
