@@ -111,7 +111,7 @@ The obtained features are explained in Table \ref{tab:features}. We defined a so
   \centering
   \includegraphics[]{../fig/001_pca.pdf}
   \vspace*{-8mm}  
-  \caption{The projected data points of the two groups overlap in the first two principal components of the PCA but there is difference in variance, indicated by the ellipses.}
+  \caption{Although the projected data points of the two groups fully overlap in the first two principal components of the PCA, there is a difference in variance, indicated by the ellipses.}
   \label{fig:pca}
 \end{figure*}
 
@@ -176,13 +176,13 @@ In Figure \ref{fig:pca} a 2D-visualization of the projected data points is shown
 	loudness            	&  9.27** & [7.53; 11.26]\\
 	speechiness         	&  3.57** & [1.95; 6.92]\\
 	acousticness        	&  1.80*  & [1.44; 2.20]\\
-	instrumentalness    	&642.00** & -\\
+	instrumentalness    	&642.00** & [111; >9.99\(\times 10^{5}\)]\\
 	tempo               		&  0.83   & [0.69; 0.98]\\
 	valence             	&  1.21   & [1.01; 1.43]\\
     \bottomrule
   \end{tabular}
 \vspace*{2mm}
-  \caption{Variance statistics and HDIs of bootstrapped samples. The HDI for instrumentalness could not be determined due to its extreme ratio. *: $p<\frac{0.05}{9}$, **: $p<\frac{0.001}{9}$}
+  \caption{Variance statistics and HDIs of bootstrapped samples. The HDI for instrumentalness needed to be clipped due to the extreme F-statistic values. *: $p<\frac{0.05}{9}$, **: $p<\frac{0.001}{9}$}
   \vspace*{-5mm}
 \end{table}
 
