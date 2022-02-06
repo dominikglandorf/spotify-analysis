@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv("../")
 
+# this class is an interface to the Spotify Web API
 class SpotifyAPI():
 
     def get_access_token(self):

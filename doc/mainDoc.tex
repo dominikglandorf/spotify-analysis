@@ -60,11 +60,14 @@
   Felix Gross\\
   Matrikelnummer 6001480\\
   \texttt{fel.gross@student.uni-tuebingen.de} \\
+  \\
+  GitHub repository: \url{https://github.com/dominikglandorf/spotify-analysis}
 }
 
 \begin{document}
-
+\vspace*{-5mm}
 \maketitle
+\vspace*{-5mm}
 
 \begin{abstract}
 % What did we do?
@@ -108,10 +111,9 @@ The obtained features are explained in Table \ref{tab:features}. We defined a so
   \centering
   \includegraphics[]{../fig/001_pca.pdf}
   \vspace*{-8mm}  
-  \caption{The projected sample on the first two principal components}
+  \caption{The projected data points of the two groups overlap in the first two principal components of the PCA but there is difference in variance, indicated by the ellipses.}
   \label{fig:pca}
 \end{figure*}
-% TODO: caption
 
 \begin{table}[t]
   \centering
@@ -133,7 +135,7 @@ The obtained features are explained in Table \ref{tab:features}. We defined a so
     \bottomrule
   \end{tabular}
   \vspace*{2mm}
-  \caption{The inspected features}
+  \caption{Description of the metadata provided by the Spotify}
   \label{tab:features}
 \end{table}
 
@@ -154,11 +156,10 @@ we calculated the 95\% highest density interval (HDI) that contains the 95\%  mo
   \centering
   \includegraphics[width=1\linewidth]{../fig/002_variances.pdf}
   \vspace*{-8mm}
-  \caption{Variances of all inspected features}
+  \caption{The variances of the single features are indicated by the spread of estimated kernel densities that are based on the histograms.}
+  \label{fig:var}
 \end{figure}
-% TODO: Caption
 
-%We will first evaluate our graphical analysis, then the statistical procedures to find out if there are different variabilities in the two groups. 
 In Figure \ref{fig:pca} a 2D-visualization of the projected data points is shown. The popular songs only spread over a smaller area within the bandwidth of the remaining songs. The standard variance within the first two principal components (PC) is visualized via the ellipses around the group means. This underlines the visual impression of lower variance of the popular songs. The mean of them is positively shifted mainly on the first PC. To understand how the original features load onto the PCs, their loadings are indicated in an arbitrary scale via the arrows originating from the data's origin. The first PC is mainly determined by loudness and energy (positive loading) as well as instrumentalness and acousticness (negative loading). This PC could be seen as the "pop" dimension since today's popular songs are generally known to be energetic and well-produced (which results in a higher loudness feature) and less instrumental or acoustic (since those are perceived as stripped versions of the original music). The second PC shows the same pattern of less variance in the pop songs, even though it is less prominent. It is mainly based on liveness, speechiness, valence, danceability and tempo. Due to the very small mean difference those features seem not to be different in popular songs, yet less variant. From the dimensionality reduction we can conclude that popular music seems to be actually less diverse in terms of its audio features and shows average differences.
 
 \begin{table}[h!]
@@ -180,15 +181,15 @@ In Figure \ref{fig:pca} a 2D-visualization of the projected data points is shown
 	valence             	&  1.21   & [1.01; 1.43]\\
     \bottomrule
   \end{tabular}
-  \vspace*{2mm}
+\vspace*{2mm}
   \caption{Variance statistics and HDIs of bootstrapped samples. The HDI for instrumentalness could not be determined due to its extreme ratio. *: $p<\frac{0.05}{9}$, **: $p<\frac{0.001}{9}$}
+  \vspace*{-5mm}
 \end{table}
 
-% TODO: caption explaining meaning of *
 
 % F-test/Variance tests results
 % which audio features are significant?
-All features except for liveness, tempo and valence had a significantly lower variance among the pop songs. The highest ratio by far was observed in the instrumentalness feature indicating there is literally no variance within the pop songs.
+The distributions of the feature values are shown in Figure \ref{fig:var}. All features except for liveness, tempo and valence had a significantly lower variance among the pop songs. The highest ratio by far was observed in the instrumentalness feature indicating there is literally no variance within the pop songs.
 % Bootstrap How robust were our point estimates of the test statistic
 The bootstrap-based robustness estimation showed that the significant results are mostly robust to resampling and will result in at least 95\% in the same decision. One exception was the feature acousticness, that was not significantly different in the whole HDI.
 
